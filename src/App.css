@@ -1,38 +1,253 @@
-.App {
-  text-align: center;
+
+/* Container principal */
+.agenda-container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: auto;
+  font-family: Arial, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Título */
+.agenda-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  gap: 10px;
+}
+
+/* Tabela */
+.agenda-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+}
+
+.agenda-th {
+  background: #f4f4f4;
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 2px solid #ddd;
+}
+
+.agenda-horario {
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  background: #fafafa;
+}
+
+.agenda-cell {
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.agenda-livre {
+  background: #e8fbe8;
+  color: #2d7a2d;
+}
+
+.agenda-livre:hover {
+  background: #c6f3c6;
+}
+
+.agenda-ocupado {
+  background: #f8d7da;
+  color: #842029;
+  cursor: not-allowed;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 400px;
+  box-shadow: 0px 6px 16px rgba(0,0,0,0.2);
+}
+
+.modal-title {
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.modal-input {
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modal-btn-cancel {
+  background: #ccc;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.modal-btn-confirm {
+  background: #2d7a2d;
   color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.modal-btn-confirm:hover {
+  background: #256025;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* =====================
+   Responsividade
+===================== */
+
+/* Para telas até 768px (tablets e celulares grandes) */
+@media (max-width: 768px) {
+  .agenda-container {
+    padding: 10px;
   }
-  to {
-    transform: rotate(360deg);
+
+  .agenda-title {
+    font-size: 24px;
+    flex-direction: column;
+    gap: 5px;
+    text-align: center;
+  }
+
+  .agenda-table {
+    font-size: 14px;
+    overflow-x: auto;
+    display: block; /* Permite scroll horizontal */
+  }
+
+  .agenda-th,
+  .agenda-horario,
+  .agenda-cell {
+    padding: 8px;
+  }
+
+  .modal-content {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .modal-title {
+    font-size: 18px;
+  }
+
+}
+
+/* Para telas até 480px (celulares pequenos) */
+@media (max-width: 480px) {
+  .agenda-title {
+    font-size: 20px;
+  }
+
+  .agenda-th,
+  .agenda-horario,
+  .agenda-cell {
+    padding: 6px;
+  }
+
+  .agenda-table {
+    font-size: 12px;
+  }
+
+  .modal-btn-cancel,
+  .modal-btn-confirm {
+    padding: 6px 10px;
+    font-size: 14px;
   }
 }
+
+/* =====================
+   Responsividade para 320px
+===================== */
+@media (max-width: 320px) {
+  .agenda-container {
+    padding: 5px;
+  }
+
+  .agenda-title {
+    font-size: 18px;
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+  }
+
+  .agenda-table {
+    display: block; /* Permite scroll horizontal */
+    font-size: 11px;
+    overflow-x: auto;
+  }
+
+  .agenda-th,
+  .agenda-horario,
+  .agenda-cell {
+    padding: 4px;
+    white-space: nowrap; /* Evita quebras de texto */
+  }
+
+  .agenda-cell {
+    cursor: pointer;
+  }
+
+  .modal-content {
+    width: 95%;
+    padding: 10px;
+  }
+
+  .modal-title {
+    font-size: 16px;
+  }
+
+  .modal-input,
+  .textarea {
+    width: 90%;
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .modal-btn-cancel,
+  .modal-btn-confirm {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
+
+
